@@ -1,0 +1,25 @@
+{
+  "name": "asyf/symfony-bundles-api",
+  "license": "MIT",
+  "description": "Bundle for entity and its nested collection serialization with complex configuration options. This bundle also contains prepared controller methods and another helpers to build your API.",
+  "authors": [
+    {
+      "name": "Michal Kolar",
+      "email": "kolar@arakis.cz"
+    },
+    {
+      "name": "Radek Petráň",
+      "email": "petran@arakis.cz"
+    }
+  ],
+  "version": "0.3.1",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Asyf\\ApiBundle\\": "lib/ApiBundle/"
+    }
+  },
+  "require": {
+    "php": "^7.1.0"
+  }
+}

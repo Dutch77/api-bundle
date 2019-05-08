@@ -1,0 +1,35 @@
+parameters:
+    asyf.api.normalizer.default.class: 'Asyf\ApiBundle\Service\Normalizer\BasicNormalizer'
+
+services:
+    Asyf\ApiBundle\Service\ConfigurationBuilder:
+        arguments:
+            - '@doctrine'
+            - '%asyf_api%'
+    Asyf\ApiBundle\Service\NormalizersManager:
+        arguments:
+            - !tagged 'asyf.api.normalizer'
+            - '%asyf.api.normalizer.default.class%'
+
+    Asyf\ApiBundle\Service\Normalizer\BasicNormalizer:
+        arguments:
+            - '@Asyf\ApiBundle\Service\NormalizersManager'
+            - '@Asyf\ApiBundle\Service\ConfigurationBuilder'
+            - '@event_dispatcher'
+        tags:
+            - { name: 'asyf.api.normalizer', alias: 'basic_normalizer' }
+
+    Asyf\ApiBundle\Service\Normalizer\DateTimeNormalizer:
+        arguments:
+            - '@Asyf\ApiBundle\Service\NormalizersManager'
+            - '@Asyf\ApiBundle\Service\ConfigurationBuilder'
+            - '@event_dispatcher'
+        tags:
+            - { name: 'asyf.api.normalizer', alias: 'date_time_normalizer' }
+
+    Asyf\ApiBundle\Controller\ApiController:
+        arguments:
+            - '@request_stack'
+            - '@Asyf\ApiBundle\Service\ConfigurationBuilder'
+            - '@Asyf\ApiBundle\Service\Normalizer\NormalizerInterface'
+            - '@doctrine'
